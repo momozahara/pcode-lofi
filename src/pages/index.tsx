@@ -71,10 +71,6 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    document.title = currentSong.name.toUpperCase();
-  }, [currentSong]);
-
-  useEffect(() => {
     if (player.current === null) {
       return;
     }
@@ -159,6 +155,7 @@ export default function Home() {
   };
 
   const onPlayerStateChange = (e: YouTubeEvent<number>) => {
+    document.title = currentSong.name.toUpperCase();
     isMuted
       ? player.current.setVolume(0)
       : player.current.setVolume(currentVolume);
