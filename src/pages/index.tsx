@@ -8,47 +8,13 @@ import {
 } from "components/button";
 import Item from "components/item";
 import YouTube, { YouTubeEvent, YouTubePlayer } from "react-youtube";
-
-const temp = [
-  {
-    name: "bootleg smoke",
-    key: "bLlloaA4b4g",
-  },
-  {
-    name: "pig smoke",
-    key: "j4sJkuOPUP8",
-  },
-  {
-    name: "chillhop raccoon",
-    key: "5yx6BWlEVcY",
-  },
-  {
-    name: "chillhop relaxing raccoon",
-    key: "7NOSDKb0HlU",
-  },
-  {
-    name: "college girl",
-    key: "MCkTebktHVc",
-  },
-  {
-    name: "college guy",
-    key: "kgx4WGK0oNU",
-  },
-  {
-    name: "college guy piano",
-    key: "tfBVp0Zi2iE",
-  },
-  {
-    name: "coffee shop",
-    key: "-5KAN9_CzSA",
-  },
-];
+import channelList from "components/channel-list";
 
 export default function Home() {
   let player = useRef<YouTubePlayer>(null);
   const [appReady, setAppReady] = useState(false);
 
-  const [currentSong, setCurrentSong] = useState(temp[0]);
+  const [currentSong, setCurrentSong] = useState(channelList[0]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [currentVolume, setCurrentVolume] = useState(100);
@@ -99,7 +65,7 @@ export default function Home() {
   const onItemClick = (item: { name: string; key: string }) => {
     setIsPlayButtonReady(false);
     setCurrentSong(item);
-    localStorage.setItem("currentSong", String(temp.indexOf(item)));
+    localStorage.setItem("currentSong", String(channelList.indexOf(item)));
   };
 
   const onPlayClick = () => {
@@ -116,12 +82,15 @@ export default function Home() {
 
     setIsPlayButtonReady(false);
 
-    let r = Math.floor(Math.random() * temp.length);
-    while (currentSong === temp[r]) {
-      r = Math.floor(Math.random() * temp.length);
+    let r = Math.floor(Math.random() * channelList.length);
+    while (currentSong === channelList[r]) {
+      r = Math.floor(Math.random() * channelList.length);
     }
-    setCurrentSong(temp[r]);
-    localStorage.setItem("currentSong", String(temp.indexOf(temp[r])));
+    setCurrentSong(channelList[r]);
+    localStorage.setItem(
+      "currentSong",
+      String(channelList.indexOf(channelList[r]))
+    );
   };
 
   const onVolumeClick = () => {
@@ -149,7 +118,7 @@ export default function Home() {
     player.current = e.target;
 
     const currentSongLocal = localStorage.getItem("currentSong");
-    setCurrentSong(temp[Number(currentSongLocal!)]);
+    setCurrentSong(channelList[Number(currentSongLocal!)]);
 
     setAppReady(true);
   };
@@ -244,7 +213,7 @@ export default function Home() {
         </div>
         <div className="content">
           <div className="items">
-            {temp.map((item) => {
+            {channelList.map((item) => {
               return (
                 <Item
                   key={item.key}
