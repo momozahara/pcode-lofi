@@ -17,7 +17,7 @@ export default function Home() {
   const [currentSong, setCurrentSong] = useState(channelList[0]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const [currentVolume, setCurrentVolume] = useState(100);
+  const [currentVolume, setCurrentVolume] = useState(50);
   const [isMenu, setIsMenu] = useState(false);
   const [isPlayButtonReady, setIsPlayButtonReady] = useState(false);
 
@@ -28,7 +28,7 @@ export default function Home() {
     }
     const currentVolumeLocal = localStorage.getItem("currentVolume");
     if (!currentVolumeLocal) {
-      localStorage.setItem("currentVolume", "100");
+      localStorage.setItem("currentVolume", "50");
     }
     const isMutedLocal = localStorage.getItem("isMuted");
     if (!isMutedLocal) {
