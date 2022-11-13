@@ -1,10 +1,6 @@
 export const getChannel = async () => {
   const response = await fetch(
-    `${
-      process.env.HOSTNAME !== undefined
-        ? process.env.HOSTNAME
-        : process.env.VERCEL_URL
-    }/api/channel`,
+    `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api/channel`,
     {
       cache: "no-cache",
     }
