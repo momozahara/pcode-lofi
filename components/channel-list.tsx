@@ -1,4 +1,4 @@
-export default [
+const lists = [
   {
     name: "bootleg smoke",
     key: "bLlloaA4b4g",
@@ -32,3 +32,10 @@ export default [
     key: "-5KAN9_CzSA",
   },
 ];
+
+export const lTest = async () => {
+  await new Promise((res) => setTimeout(res, 300));
+  return lists;
+};
+
+export default lists;
