@@ -6,7 +6,9 @@ interface Props {
   children: React.ReactNode;
 }
 
-const montserrat = Montserrat();
+const montserrat = Montserrat({
+  subsets: ["latin"],
+});
 
 export default function RootLayout({ children }: Props) {
   return (
