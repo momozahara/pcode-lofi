@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ChangeEvent, useState, useEffect, useRef } from "react";
 import {
   Play,
