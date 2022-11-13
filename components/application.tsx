@@ -19,6 +19,7 @@ interface Props {
 }
 
 export default function Home({ channelList }: Props) {
+  let mainRef = useRef<HTMLElement>(null);
   let player = useRef<YouTubePlayer>(null);
   const [appReady, setAppReady] = useState(false);
 
@@ -28,6 +29,15 @@ export default function Home({ channelList }: Props) {
   const [currentVolume, setCurrentVolume] = useState(50);
   const [isMenu, setIsMenu] = useState(false);
   const [isPlayButtonReady, setIsPlayButtonReady] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (!mainRef.current) {
+        return;
+      }
+      mainRef.current.classList.remove("opacity-0");
+    }, 1000);
+  }, []);
 
   useEffect(() => {
     const currentSongLocal = localStorage.getItem("currentSong");
@@ -156,7 +166,10 @@ export default function Home({ channelList }: Props) {
   };
 
   return (
-    <main className="fixed top-0 left-0 overflow-hidden fill">
+    <main
+      ref={mainRef}
+      className="fixed top-0 left-0 overflow-hidden fill opacity-0 transition-all"
+    >
       <div
         className={`z-50 fixed top-0 left-0 fill bg-black ${
           appReady ? "hidden" : ""
