@@ -4,10 +4,7 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     appDir: true,
-  },
-  env: {
-    HOSTNAME: process.env.HOSTNAME,
-    VERCEL_URL: "https://" + process.env.VERCEL_URL,
+    enableUndici: true,
   },
 };
 
