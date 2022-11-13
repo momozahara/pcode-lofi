@@ -8,9 +8,16 @@ import {
 } from "components/button";
 import Item from "components/item";
 import YouTube, { YouTubeEvent, YouTubePlayer } from "react-youtube";
-import channelList from "components/channel-list";
+// import channelList from "components/channel-list";
 
-export default function Home() {
+interface Props {
+  channelList: {
+    name: string;
+    key: string;
+  }[];
+}
+
+export default function Home({ channelList }: Props) {
   let player = useRef<YouTubePlayer>(null);
   const [appReady, setAppReady] = useState(false);
 
