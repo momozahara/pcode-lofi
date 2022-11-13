@@ -33,6 +33,7 @@ const lists = [
   },
 ];
 
+// prepare for prisma in the future
 export const lTest = async () => {
   await new Promise((res) => setTimeout(res, 300));
   return lists;
