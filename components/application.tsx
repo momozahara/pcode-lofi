@@ -8,7 +8,6 @@ import {
 } from "components/button";
 import Item from "components/item";
 import YouTube, { YouTubeEvent, YouTubePlayer } from "react-youtube";
-// import channelList from "components/channel-list";
 
 interface Props {
   channelList: {
