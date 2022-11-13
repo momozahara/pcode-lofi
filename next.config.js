@@ -7,6 +7,7 @@ const nextConfig = {
   },
   env: {
     HOSTNAME: process.env.HOSTNAME,
+    VERCEL_URL: process.env.VERCEL_URL,
   },
 };
 
