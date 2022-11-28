@@ -1,5 +1,3 @@
-"use client";
-
 import React, { ChangeEvent, useState, useEffect, useRef } from "react";
 import {
   Play,
@@ -10,6 +8,8 @@ import {
 } from "components/button";
 import Item from "components/item";
 import YouTube, { YouTubeEvent, YouTubePlayer } from "react-youtube";
+
+import { prisma } from "prisma/client";
 
 interface Props {
   channelList: {
@@ -267,4 +267,13 @@ export default function Home({ channelList }: Props) {
       </div>
     </main>
   );
+}
+
+export async function getServerSideProps() {
+  const result = await prisma.channel.findMany();
+  return {
+    props: {
+      channelList: result,
+    },
+  };
 }
