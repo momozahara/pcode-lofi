@@ -33,7 +33,7 @@ const seedData: Prisma.ChannelCreateInput[] = [
   },
   {
     name: "coffee shop",
-    key: "-5KAN9_CzSA",
+    key: "e3L1PIY1pN8",
   },
 ];
 
