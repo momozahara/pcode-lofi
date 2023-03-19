@@ -55,12 +55,11 @@ const seed = async (): Promise<Prisma.ChannelCreateInput[]> => {
     }
     result.push(s);
   }
-  if (result.length === 0) {
-    return result;
+  if (result.length !== 0) {
+    await prisma.channel.createMany({
+      data: result,
+    });
   }
-  await prisma.channel.createMany({
-    data: result,
-  });
   return result;
 };
 
