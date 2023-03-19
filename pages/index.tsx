@@ -9,7 +9,7 @@ import {
 import Item from "components/item";
 import YouTube, { YouTubeEvent, YouTubePlayer } from "react-youtube";
 
-import { prisma } from "prisma/client";
+import { getChannel } from "components/channel";
 
 interface Props {
   channelList: {
@@ -270,7 +270,8 @@ export default function Home({ channelList }: Props) {
 }
 
 export async function getServerSideProps() {
-  const result = await prisma.channel.findMany();
+  let result = await getChannel();
+  result = result.sort((a, b) => a.weight - b.weight);
   return {
     props: {
       channelList: result,

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --dir .",
+    "lint": "next lint --dir ."
+  },
+  "prisma": {
     "seed": "ts-node prisma/seed.dev.ts"
   },
   "dependencies": {

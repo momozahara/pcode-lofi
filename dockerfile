@@ -7,9 +7,6 @@ RUN yarn install
 
 FROM node:16.17-alpine as builder
 
-ARG DATABASE_URL
-ENV DATABASE_URL=$DATABASE_URL
-
 WORKDIR /app
 
 COPY . .
@@ -18,9 +15,6 @@ RUN yarn prisma generate
 RUN yarn build
 
 FROM node:16.17-alpine
-
-ARG DATABASE_URL
-ENV DATABASE_URL=$DATABASE_URL
 
 WORKDIR /app
 
