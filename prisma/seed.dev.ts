@@ -20,7 +20,7 @@ const seedData: Prisma.ChannelCreateInput[] = [
   },
   {
     name: "college girl",
-    key: "MCkTebktHVc",
+    key: "jfKfPfyJRdk",
     weight: 3,
   },
   {
@@ -29,19 +29,24 @@ const seedData: Prisma.ChannelCreateInput[] = [
     weight: 4,
   },
   {
-    name: "college guy",
-    key: "kgx4WGK0oNU",
+    name: "lonely girl",
+    key: "dxUtV-zNv9w",
     weight: 5,
+  },
+  {
+    name: "college guy",
+    key: "epaP2LCCuVE",
+    weight: 6,
   },
   {
     name: "college guy piano",
     key: "tfBVp0Zi2iE",
-    weight: 6,
+    weight: 7,
   },
   {
     name: "coffee shop",
     key: "e3L1PIY1pN8",
-    weight: 7,
+    weight: 8,
   },
 ];
 
