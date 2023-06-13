@@ -249,7 +249,6 @@ export default function Home({ channelList }: Props) {
       </div>
 
       <div className="controller">
-        {/* <Revert /> */}
         <Play
           isPlaying={isPlaying}
           onClick={onPlayClick}
