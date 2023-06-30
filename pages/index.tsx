@@ -9,7 +9,7 @@ import {
 import Item from "components/item";
 import YouTube, { YouTubeEvent, YouTubePlayer } from "react-youtube";
 
-import { getChannel } from "components/channel";
+import { getChannel } from "components/api/channel";
 
 interface Props {
   channelList: {
