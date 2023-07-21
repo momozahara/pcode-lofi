@@ -11,7 +11,7 @@ import YouTube, { YouTubeEvent, YouTubePlayer } from "react-youtube";
 
 import { getChannel } from "components/api/channel";
 
-import { Props, ItemType } from "./types/index";
+import { Props, ItemType } from "./types/index.types";
 
 export default function Home({ channelList }: Props) {
   let mainRef = useRef<HTMLElement>(null);

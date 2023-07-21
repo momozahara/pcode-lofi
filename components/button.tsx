@@ -3,7 +3,7 @@ import {
   ShuffleProps,
   VolumeProps,
   VolumeSliderProps,
-} from "./types/button";
+} from "./types/button.types";
 
 export const leftArrowPath =
   "M28.1 36.45 15.55 23.9 28.1 11.35l2.6 2.6-9.95 9.95 9.95 9.95Z";
