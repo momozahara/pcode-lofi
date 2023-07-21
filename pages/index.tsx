@@ -30,13 +30,20 @@ export default function Home({ channelList }: Props) {
   const [isMenu, setIsMenu] = useState(false);
   const [isPlayButtonReady, setIsPlayButtonReady] = useState(false);
 
+  const [helper, setHelper] = useState(true);
+
   useEffect(() => {
     function globalEvent(event: KeyboardEvent) {
       const key = event.code;
       console.log(key);
       switch (key.toLowerCase()) {
+        // To prevent page scrolling while jumping element
         case "tab": {
           event.preventDefault();
+          break;
+        }
+        case "escape": {
+          setHelper(false);
           break;
         }
         case "space": {
@@ -67,6 +74,13 @@ export default function Home({ channelList }: Props) {
           const index = value === channelList.length ? 0 : value;
           setCurrentSong(channelList[index]);
           localStorage.setItem("currentSong", String(index));
+          break;
+        }
+        case "slash": {
+          if (!event.shiftKey) {
+            break;
+          }
+          setHelper(!helper);
           break;
         }
       }
@@ -219,6 +233,27 @@ export default function Home({ channelList }: Props) {
       ref={mainRef}
       className="fixed top-0 left-0 overflow-hidden fill opacity-0 transition-all"
     >
+      {helper && (
+        <section
+          className="z-[99] fixed top-0 left-0 fill bg-black"
+          onClick={() => setHelper(false)}
+        >
+          <div className="h-screen w-full flex justify-center items-center">
+            <div className="grid grid-cols-2 gap-2 text-neutral-100">
+              <div>?</div>
+              <div>Toggle Helper</div>
+              <div>Escape</div>
+              <div>Close Helper</div>
+              <div>Space</div>
+              <div>Play / Pause</div>
+              <div>Arrow Up/Down</div>
+              <div>Change Channel</div>
+              <div>M</div>
+              <div>Toggle Mute</div>
+            </div>
+          </div>
+        </section>
+      )}
       <div
         className={`z-50 fixed top-0 left-0 fill bg-black ${
           appReady ? "hidden" : ""
