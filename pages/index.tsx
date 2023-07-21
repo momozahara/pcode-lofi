@@ -31,6 +31,55 @@ export default function Home({ channelList }: Props) {
   const [isPlayButtonReady, setIsPlayButtonReady] = useState(false);
 
   useEffect(() => {
+    function globalEvent(event: KeyboardEvent) {
+      const key = event.code;
+      console.log(key);
+      switch (key.toLowerCase()) {
+        case "tab": {
+          event.preventDefault();
+          break;
+        }
+        case "space": {
+          event.preventDefault();
+          onPlayClick();
+          break;
+        }
+        case "keym": {
+          event.preventDefault();
+          onVolumeClick();
+          break;
+        }
+        case "arrowup": {
+          event.preventDefault();
+
+          setIsPlayButtonReady(false);
+          const value = channelList.indexOf(currentSong) - 1;
+          const index = value === -1 ? channelList.length - 1 : value;
+          setCurrentSong(channelList[index]);
+          localStorage.setItem("currentSong", String(index));
+          break;
+        }
+        case "arrowdown": {
+          event.preventDefault();
+
+          setIsPlayButtonReady(false);
+          const value = channelList.indexOf(currentSong) + 1;
+          const index = value === channelList.length ? 0 : value;
+          setCurrentSong(channelList[index]);
+          localStorage.setItem("currentSong", String(index));
+          break;
+        }
+      }
+    }
+
+    window.addEventListener("keydown", globalEvent);
+
+    return () => {
+      window.removeEventListener("keydown", globalEvent);
+    };
+  });
+
+  useEffect(() => {
     setTimeout(() => {
       if (!mainRef.current) {
         return;
