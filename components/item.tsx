@@ -1,17 +1,6 @@
 import React from "react";
 import { playPath } from "components/button";
-
-type ItemType = {
-  name: string;
-  key: string;
-};
-
-interface ItemProps {
-  item: ItemType;
-  current: ItemType;
-  // eslint-disable-next-line no-unused-vars
-  onClick(item: ItemType): void;
-}
+import { ItemProps } from "./types/item";
 
 export default function Item({ item, current, onClick }: ItemProps) {
   return (

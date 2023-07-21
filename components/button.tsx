@@ -1,4 +1,9 @@
-import React, { ChangeEventHandler, MouseEventHandler } from "react";
+import {
+  PlayProps,
+  ShuffleProps,
+  VolumeProps,
+  VolumeSliderProps,
+} from "./types/button";
 
 export const leftArrowPath =
   "M28.1 36.45 15.55 23.9 28.1 11.35l2.6 2.6-9.95 9.95 9.95 9.95Z";
@@ -38,11 +43,6 @@ export function Revert() {
   );
 }
 
-interface PlayProps {
-  isPlaying: boolean;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-}
-
 export function Play({ isPlaying, onClick }: PlayProps) {
   return (
     <button
@@ -64,10 +64,6 @@ export function Play({ isPlaying, onClick }: PlayProps) {
   );
 }
 
-interface ShuffleProps {
-  onClick: MouseEventHandler;
-}
-
 export function Shuffle({ onClick }: ShuffleProps) {
   return (
     <button
@@ -87,12 +83,6 @@ export function Shuffle({ onClick }: ShuffleProps) {
       </div>
     </button>
   );
-}
-
-interface VolumeProps {
-  currentVolume: number;
-  isMuted: boolean;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 export function Volume({ currentVolume, isMuted, onClick }: VolumeProps) {
@@ -126,10 +116,6 @@ export function Volume({ currentVolume, isMuted, onClick }: VolumeProps) {
   );
 }
 
-interface VolumeSliderProps {
-  currentVolume: number;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
-}
 export function VolumeSlider({ currentVolume, onChange }: VolumeSliderProps) {
   return (
     <div className="hidden sm:block">

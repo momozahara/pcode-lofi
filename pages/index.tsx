@@ -11,12 +11,7 @@ import YouTube, { YouTubeEvent, YouTubePlayer } from "react-youtube";
 
 import { getChannel } from "components/api/channel";
 
-interface Props {
-  channelList: {
-    name: string;
-    key: string;
-  }[];
-}
+import { Props, ItemType } from "./types/index";
 
 export default function Home({ channelList }: Props) {
   let mainRef = useRef<HTMLElement>(null);
@@ -143,7 +138,7 @@ export default function Home({ channelList }: Props) {
     setIsMuted(Boolean(Number(isMutedLocal)));
   }, [appReady]);
 
-  const onItemClick = (item: { name: string; key: string }) => {
+  const onItemClick = (item: ItemType) => {
     setIsPlayButtonReady(false);
     setCurrentSong(item);
     localStorage.setItem("currentSong", String(channelList.indexOf(item)));
