@@ -235,7 +235,7 @@ export default function Home({ channelList }: Props) {
     >
       {helper && (
         <section
-          className="z-[99] fixed top-0 left-0 fill bg-black"
+          className="z-[99] fixed top-0 left-0 fill bg-black opacity-90"
           onClick={() => setHelper(false)}
         >
           <div className="h-screen w-full flex justify-center items-center">
