@@ -261,11 +261,11 @@ export default function Home({ channelList }: Props) {
       ></div>
 
       <div
-        className={`absolute top-0 left-0 fill z-10 bg-black ${
+        className={`fixed top-0 left-0 fill z-10 bg-black ${
           isPlaying ? "opacity-[0]" : "opacity-[0.98]"
         } transition-all`}
       />
-      <div className="absolute top-0 left-0 fill z-0">
+      <div className="fixed top-0 left-0 fill z-0">
         <YouTube
           videoId={currentSong.key}
           className="youtube-player"
@@ -285,7 +285,7 @@ export default function Home({ channelList }: Props) {
           onReady={onPlayerReady}
           onStateChange={onPlayerStateChange}
         />
-        <div className="absolute top-0 left-0 youtube-shadow fill" />
+        <div className="fixed top-0 left-0 youtube-shadow fill" />
       </div>
 
       <div className="z-20 fixed top-0 left-0 lg:hidden">
