@@ -30,7 +30,7 @@ export default function Home({ channelList }: Props) {
   const [isMenu, setIsMenu] = useState(false);
   const [isPlayButtonReady, setIsPlayButtonReady] = useState(false);
 
-  const [helper, setHelper] = useState(true);
+  const [helper, setHelper] = useState(false);
 
   useEffect(() => {
     function globalEvent(event: KeyboardEvent) {
