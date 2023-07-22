@@ -53,6 +53,9 @@ export default function Home({ channelList }: Props) {
         }
         case "arrowup": {
           event.preventDefault();
+          if (!isPlayButtonReady) {
+            break;
+          }
 
           setIsPlayButtonReady(false);
           const value = channelList.indexOf(currentSong) - 1;
@@ -63,6 +66,9 @@ export default function Home({ channelList }: Props) {
         }
         case "arrowdown": {
           event.preventDefault();
+          if (!isPlayButtonReady) {
+            break;
+          }
 
           setIsPlayButtonReady(false);
           const value = channelList.indexOf(currentSong) + 1;
