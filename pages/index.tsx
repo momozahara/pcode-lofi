@@ -195,8 +195,7 @@ export default function Home({ channelList }: Props) {
     setIsMuted(value);
   };
 
-  const _onVolumeSliderChange = (n: number) => {
-    const value = Number(n);
+  const _onVolumeSliderChange = (value: number) => {
     localStorage.setItem("currentVolume", String(value));
     localStorage.setItem("isMuted", "0");
     if (value === 0) {
