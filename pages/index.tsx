@@ -79,29 +79,13 @@ export default function Home({ channelList }: Props) {
         case "arrowleft": {
           let targetVolume = currentVolume - 10;
           targetVolume = targetVolume >= 0 ? targetVolume : 0;
-          const value = Number(targetVolume);
-          localStorage.setItem("currentVolume", String(value));
-          localStorage.setItem("isMuted", "0");
-          if (value === 0) {
-            setIsMuted(true);
-          } else {
-            setIsMuted(false);
-          }
-          setCurrentVolume(value);
+          _onVolumeSliderChange(targetVolume);
           break;
         }
         case "arrowright": {
           let targetVolume = currentVolume + 10;
           targetVolume = targetVolume <= 100 ? targetVolume : 100;
-          const value = Number(targetVolume);
-          localStorage.setItem("currentVolume", String(value));
-          localStorage.setItem("isMuted", "0");
-          if (value === 0) {
-            setIsMuted(true);
-          } else {
-            setIsMuted(false);
-          }
-          setCurrentVolume(value);
+          _onVolumeSliderChange(targetVolume);
           break;
         }
         case "slash": {
@@ -211,8 +195,8 @@ export default function Home({ channelList }: Props) {
     setIsMuted(value);
   };
 
-  const onVolumeSliderChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.currentTarget.value);
+  const _onVolumeSliderChange = (n: number) => {
+    const value = Number(n);
     localStorage.setItem("currentVolume", String(value));
     localStorage.setItem("isMuted", "0");
     if (value === 0) {
@@ -221,6 +205,10 @@ export default function Home({ channelList }: Props) {
       setIsMuted(false);
     }
     setCurrentVolume(value);
+  };
+
+  const onVolumeSliderChange = (e: ChangeEvent<HTMLInputElement>) => {
+    _onVolumeSliderChange(Number(e.currentTarget.value));
   };
 
   const onPlayerReady = (e: YouTubeEvent) => {
