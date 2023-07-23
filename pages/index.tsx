@@ -30,7 +30,6 @@ export default function Home({ channelList }: Props) {
   useEffect(() => {
     function globalEvent(event: KeyboardEvent) {
       const key = event.code;
-      console.log(key);
       switch (key.toLowerCase()) {
         // To prevent page scrolling while jumping element
         case "tab": {
