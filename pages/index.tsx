@@ -76,6 +76,34 @@ export default function Home({ channelList }: Props) {
           localStorage.setItem("currentSong", String(index));
           break;
         }
+        case "arrowleft": {
+          let targetVolume = currentVolume - 10;
+          targetVolume = targetVolume >= 0 ? targetVolume : 0;
+          const value = Number(targetVolume);
+          localStorage.setItem("currentVolume", String(value));
+          localStorage.setItem("isMuted", "0");
+          if (value === 0) {
+            setIsMuted(true);
+          } else {
+            setIsMuted(false);
+          }
+          setCurrentVolume(value);
+          break;
+        }
+        case "arrowright": {
+          let targetVolume = currentVolume + 10;
+          targetVolume = targetVolume <= 100 ? targetVolume : 100;
+          const value = Number(targetVolume);
+          localStorage.setItem("currentVolume", String(value));
+          localStorage.setItem("isMuted", "0");
+          if (value === 0) {
+            setIsMuted(true);
+          } else {
+            setIsMuted(false);
+          }
+          setCurrentVolume(value);
+          break;
+        }
         case "slash": {
           if (!event.shiftKey) {
             break;
