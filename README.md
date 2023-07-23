@@ -12,4 +12,5 @@ This is clone version of [https://lofimusic.app/](https://lofimusic.app/) made w
 | Escape | Close Keyboard helper |
 | Space | Play / Pause |
 | Arrow Up / Down | Change channel |
+| Arrow Left / Right | Change volume |
 | M | Toggle mute |
