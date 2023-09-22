@@ -1,4 +1,4 @@
-import { MouseEventHandler, ChangeEventHandler } from "react";
+import { type MouseEventHandler, type ChangeEventHandler } from "react";
 
 export interface PlayProps {
   isPlaying: boolean;

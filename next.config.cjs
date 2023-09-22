@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: false,
   swcMinify: true,
   output: "standalone",
-  async rewrites() {
+  rewrites() {
     return [
       {
         source: "/:path*",

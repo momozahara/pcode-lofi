@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useEffect, useRef } from "react";
+import React, { type ChangeEvent, useState, useEffect, useRef } from "react";
 import {
   Play,
   Shuffle,
@@ -7,15 +7,16 @@ import {
   menuPath,
 } from "components/button";
 import Item from "components/item";
-import YouTube, { YouTubeEvent, YouTubePlayer } from "react-youtube";
+import YouTube, { type YouTubeEvent } from "react-youtube";
 
 import { getChannel } from "components/api/channel";
 
-import { Props, ItemType } from "../components/types/index.types";
+import { type Props, type ItemType } from "../components/types/index.types";
+import { type YouTubePlayer } from "components/types/youtubeplayer.types";
 
 export default function Home({ channelList }: Props) {
-  let mainRef = useRef<HTMLElement>(null);
-  let player = useRef<YouTubePlayer>(null);
+  const mainRef = useRef<HTMLElement>();
+  const player = useRef<YouTubePlayer>();
   const [appReady, setAppReady] = useState(false);
 
   const [currentSong, setCurrentSong] = useState(channelList[0]);
@@ -130,14 +131,14 @@ export default function Home({ channelList }: Props) {
   }, []);
 
   useEffect(() => {
-    if (player.current === null) {
+    if (player.current === undefined) {
       return;
     }
     isPlaying ? player.current.playVideo() : player.current.pauseVideo();
-  }, [isPlaying]);
+  }, [player, isPlaying]);
 
   useEffect(() => {
-    if (player.current === null) {
+    if (player.current === undefined) {
       return;
     }
     if (!player.current.setVolume) {
@@ -146,7 +147,7 @@ export default function Home({ channelList }: Props) {
     isMuted
       ? player.current.setVolume(0)
       : player.current.setVolume(currentVolume);
-  }, [isMuted, currentVolume]);
+  }, [player, isMuted, currentVolume]);
 
   useEffect(() => {
     const currentVolumeLocal = localStorage.getItem("currentVolume");
@@ -182,7 +183,7 @@ export default function Home({ channelList }: Props) {
     setCurrentSong(channelList[r]);
     localStorage.setItem(
       "currentSong",
-      String(channelList.indexOf(channelList[r]))
+      String(channelList.indexOf(channelList[r])),
     );
   };
 
@@ -210,8 +211,8 @@ export default function Home({ channelList }: Props) {
     _onVolumeSliderChange(Number(e.currentTarget.value));
   };
 
-  const onPlayerReady = (e: YouTubeEvent) => {
-    player.current = e.target;
+  const onPlayerReady = (e: YouTubePlayer) => {
+    player.current = e;
 
     const currentSongLocal = localStorage.getItem("currentSong");
     setCurrentSong(channelList[Number(currentSongLocal!)]);
@@ -220,6 +221,10 @@ export default function Home({ channelList }: Props) {
   };
 
   const onPlayerStateChange = (e: YouTubeEvent<number>) => {
+    if (player.current === undefined) {
+      return;
+    }
+
     document.title = currentSong.name.toUpperCase();
     isMuted
       ? player.current.setVolume(0)
@@ -245,7 +250,9 @@ export default function Home({ channelList }: Props) {
 
   return (
     <main
-      ref={mainRef}
+      ref={(ref) => {
+        mainRef.current = ref!;
+      }}
       className="fixed top-0 left-0 overflow-hidden fill opacity-0 transition-all"
     >
       {helper && (
@@ -297,7 +304,9 @@ export default function Home({ channelList }: Props) {
               widgetid: 1,
             },
           }}
-          onReady={onPlayerReady}
+          onReady={(e) => {
+            onPlayerReady(e.target as YouTubePlayer);
+          }}
           onStateChange={onPlayerStateChange}
         />
         <div className="fixed top-0 left-0 youtube-shadow fill" />

@@ -1,4 +1,4 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { type Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -52,7 +52,7 @@ const seedData: Prisma.ChannelCreateInput[] = [
 
 const seed = async (): Promise<Prisma.ChannelCreateInput[]> => {
   const channels = await prisma.channel.findMany();
-  let result: Prisma.ChannelCreateInput[] = [];
+  const result: Prisma.ChannelCreateInput[] = [];
   for (const s of seedData) {
     const _isExist = channels.find((x) => x.key === s.key);
     if (_isExist) {
@@ -73,4 +73,4 @@ const start = async () => {
   console.log(channels);
 };
 
-start();
+void start();

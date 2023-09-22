@@ -1,8 +1,8 @@
 import {
-  PlayProps,
-  ShuffleProps,
-  VolumeProps,
-  VolumeSliderProps,
+  type PlayProps,
+  type ShuffleProps,
+  type VolumeProps,
+  type VolumeSliderProps,
 } from "./types/button.types";
 
 export const leftArrowPath =
