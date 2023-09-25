@@ -1,9 +1,11 @@
+FROM node:16.17-alpine as base
+RUN yarn global add pnpm
 FROM node:16.17-alpine as dependencies
 
 WORKDIR /app
 
-COPY ./package.json ./yarn.lock ./
-RUN yarn install
+COPY ./package.json ./pnpm-lock.yaml ./
+RUN pnpm install
 
 FROM node:16.17-alpine as builder
 
@@ -11,8 +13,8 @@ WORKDIR /app
 
 COPY . .
 COPY --from=dependencies /app/node_modules ./node_modules
-RUN yarn prisma generate
-RUN yarn build
+RUN pnpm prisma generate
+RUN pnpm build
 
 FROM node:16.17-alpine
 
