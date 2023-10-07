@@ -31,5 +31,3 @@ spec:
             secretKeyRef:
               name: database
               key: DATABASE_URL_LOFI
-      imagePullSecrets:
-      - name: ghcr
