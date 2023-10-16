@@ -218,6 +218,7 @@ export default function Home({ channelList }: Props) {
     setCurrentSong(channelList[Number(currentSongLocal!)]);
 
     setAppReady(true);
+    setIsPlayButtonReady(true);
   };
 
   const onPlayerStateChange = (e: YouTubeEvent<number>) => {
