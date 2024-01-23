@@ -1,18 +1,19 @@
-import React, { type ChangeEvent, useState, useEffect, useRef } from "react";
+import React, { type ChangeEvent, useEffect, useRef, useState } from "react";
 import {
+  menuPath,
   Play,
   Shuffle,
   Volume,
   VolumeSlider,
-  menuPath,
 } from "components/button";
 import Item from "components/item";
 import YouTube, { type YouTubeEvent } from "react-youtube";
 
 import { getChannel } from "components/api/channel";
 
-import { type Props, type ItemType } from "../components/types/index.types";
+import { type ItemType, type Props } from "../components/types/index.types";
 import { type YouTubePlayer } from "components/types/youtubeplayer.types";
+import Helper from "components/helper";
 
 export default function Home({ channelList }: Props) {
   const mainRef = useRef<HTMLElement>();
@@ -256,27 +257,7 @@ export default function Home({ channelList }: Props) {
       }}
       className="fixed top-0 left-0 overflow-hidden fill opacity-0 transition-all"
     >
-      {helper && (
-        <section
-          className="z-[99] fixed top-0 left-0 fill bg-black opacity-90"
-          onClick={() => setHelper(false)}
-        >
-          <div className="h-screen w-full flex justify-center items-center">
-            <div className="grid grid-cols-2 gap-2 text-neutral-100">
-              <div>?</div>
-              <div>Toggle Helper</div>
-              <div>Escape</div>
-              <div>Close Helper</div>
-              <div>Space</div>
-              <div>Play / Pause</div>
-              <div>Arrow Up/Down</div>
-              <div>Change Channel</div>
-              <div>M</div>
-              <div>Toggle Mute</div>
-            </div>
-          </div>
-        </section>
-      )}
+      {helper && <Helper onClick={() => setHelper(false)} />}
       <div
         className={`z-50 fixed top-0 left-0 fill bg-black ${
           appReady ? "hidden" : ""
