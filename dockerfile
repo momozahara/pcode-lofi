@@ -1,31 +1,23 @@
-FROM node:16.17-alpine as base
-RUN yarn global add pnpm
-
-FROM base as dependencies
-
+FROM node:20-alpine AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+COPY . /app
 WORKDIR /app
 
-COPY ./package.json ./pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+FROM base AS dep
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
-FROM base as builder
-
-WORKDIR /app
-
-COPY . .
-COPY --from=dependencies /app/node_modules ./node_modules
+FROM base AS build
+COPY --from=dep /app/node_modules ./node_modules
 RUN pnpm prisma generate
-RUN pnpm build
+RUN pnpm run build
 
-FROM node:16.17-alpine
-
-WORKDIR /app
-
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/next.config.mjs ./next.config.mjs
-
+FROM base
+COPY --from=build /app/.next/standalone ./
+COPY --from=build /app/.next/static ./.next/static
+COPY --from=build /app/public ./public
+COPY --from=build /app/package.json ./package.json
+COPY --from=build /app/next.config.mjs ./next.config.mjs
 EXPOSE 3000
 CMD [ "node", "server.js" ]
