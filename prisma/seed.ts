@@ -4,49 +4,34 @@ const prisma = new PrismaClient();
 
 const seedData: Prisma.ChannelCreateInput[] = [
   {
-    name: "bootleg smoke",
-    key: "bLlloaA4b4g",
-    weight: 0,
-  },
-  {
     name: "chillhop raccoon",
     key: "5yx6BWlEVcY",
-    weight: 1,
+    weight: 0,
   },
   {
     name: "chillhop relaxing raccoon",
     key: "7NOSDKb0HlU",
-    weight: 2,
+    weight: 1,
   },
   {
     name: "college girl",
     key: "jfKfPfyJRdk",
-    weight: 3,
+    weight: 2,
   },
   {
     name: "sleepy girl",
     key: "rUxyKA_-grg",
-    weight: 4,
-  },
-  {
-    name: "lonely girl",
-    key: "dxUtV-zNv9w",
-    weight: 5,
+    weight: 3,
   },
   {
     name: "college guy",
     key: "4xDzrJKXOOY",
-    weight: 6,
-  },
-  {
-    name: "college guy piano",
-    key: "tfBVp0Zi2iE",
-    weight: 7,
+    weight: 4,
   },
   {
     name: "coffee shop",
     key: "lP26UCnoH9s",
-    weight: 8,
+    weight: 5,
   },
 ];
 
