@@ -1,17 +1,15 @@
-FROM node:20-alpine AS base
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
-COPY . /app
+FROM oven/bun:1 AS base
 WORKDIR /app
 
 FROM base AS dep
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+COPY package.json .
+RUN --mount=type=cache,id=bun,target=~/.bun/install/cache bun install --frozen-lockfile
 
 FROM base AS build
 COPY --from=dep /app/node_modules ./node_modules
-RUN pnpm prisma generate
-RUN pnpm run build
+COPY . .
+RUN bun run prisma generate
+RUN bun run build
 
 FROM base
 COPY --from=build /app/.next/standalone ./
@@ -20,4 +18,4 @@ COPY --from=build /app/public ./public
 COPY --from=build /app/package.json ./package.json
 COPY --from=build /app/next.config.mjs ./next.config.mjs
 EXPOSE 3000
-CMD [ "node", "server.js" ]
+CMD [ "bun", "run", "server.js" ]
