@@ -6,6 +6,6 @@ export interface ItemType {
 export interface ItemProps {
   item: ItemType;
   current: ItemType;
-  // eslint-disable-next-line no-unused-vars
+
   onClick(item: ItemType): void;
 }

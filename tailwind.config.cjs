@@ -1,4 +1,3 @@
-/* eslint-disable object-curly-newline */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [

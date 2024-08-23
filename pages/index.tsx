@@ -135,7 +135,11 @@ export default function Home({ channelList }: Props) {
     if (player.current === undefined) {
       return;
     }
-    isPlaying ? player.current.playVideo() : player.current.pauseVideo();
+    if (isPlaying) {
+      player.current.playVideo();
+    } else {
+      player.current.pauseVideo();
+    }
   }, [player, isPlaying]);
 
   useEffect(() => {
@@ -145,9 +149,11 @@ export default function Home({ channelList }: Props) {
     if (!player.current.setVolume) {
       return;
     }
-    isMuted
-      ? player.current.setVolume(0)
-      : player.current.setVolume(currentVolume);
+    if (isMuted) {
+      player.current.setVolume(0);
+    } else {
+      player.current.setVolume(currentVolume);
+    }
   }, [player, isMuted, currentVolume]);
 
   useEffect(() => {
@@ -228,9 +234,11 @@ export default function Home({ channelList }: Props) {
     }
 
     document.title = currentSong.name.toUpperCase();
-    isMuted
-      ? player.current.setVolume(0)
-      : player.current.setVolume(currentVolume);
+    if (isMuted) {
+      player.current.setVolume(0);
+    } else {
+      player.current.setVolume(currentVolume);
+    }
     switch (e.data) {
       case -1: {
         return setIsPlayButtonReady(true);

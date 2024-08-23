@@ -34,6 +34,7 @@ export default tseslint.config(
         "warn",
         {
           allowConstantExport: true,
+          allowExportNames: ["getServerSideProps"]
         },
       ],
       curly: "error",
