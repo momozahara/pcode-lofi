@@ -1,4 +1,4 @@
-FROM oven/bun:1 AS base
+FROM oven/bun:canary-slim AS base
 WORKDIR /app
 
 FROM base AS dep
