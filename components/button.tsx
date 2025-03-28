@@ -102,12 +102,12 @@ export function Volume({ currentVolume, isMuted, onClick }: VolumeProps) {
               isMuted
                 ? volumeOffPath
                 : currentVolume > 60
-                ? volumeUpPath
-                : currentVolume > 20
-                ? volumeDownPath
-                : currentVolume !== 0
-                ? volumeMutePath
-                : volumeOffPath
+                  ? volumeUpPath
+                  : currentVolume > 20
+                    ? volumeDownPath
+                    : currentVolume !== 0
+                      ? volumeMutePath
+                      : volumeOffPath
             }
           />
         </svg>

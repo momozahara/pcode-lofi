@@ -1,21 +1,31 @@
-FROM oven/bun:canary-slim AS base
-WORKDIR /app
+# use the official Bun image
+# see all versions at https://hub.docker.com/r/oven/bun/tags
+FROM oven/bun:1 AS base
+WORKDIR /usr/src/app
 
-FROM base AS dep
-COPY package.json .
-RUN --mount=type=cache,id=bun,target=~/.bun/install/cache bun install --frozen-lockfile
+# install dependencies into temp directory
+# this will cache them and speed up future builds
+FROM base AS install
 
-FROM base AS build
-COPY --from=dep /app/node_modules ./node_modules
+RUN mkdir -p /temp/prod
+COPY package.json bun.lock /temp/prod/
+RUN cd /temp/prod && bun install --frozen-lockfile
+
+# copy node_modules from temp directory
+# then copy all (non-ignored) project files into the image
+FROM base AS prerelease
+COPY --from=install /temp/prod/node_modules node_modules
 COPY . .
+
+# [optional] tests & build
+ENV NODE_ENV=production
 RUN bun run prisma generate
 RUN bun run build
 
-FROM base
-COPY --from=build /app/.next/standalone ./
-COPY --from=build /app/.next/static ./.next/static
-COPY --from=build /app/public ./public
-COPY --from=build /app/package.json ./package.json
-COPY --from=build /app/next.config.mjs ./next.config.mjs
-EXPOSE 3000
+FROM base AS release
+COPY --from=prerelease /usr/src/app/.next/standalone ./
+COPY --from=prerelease /usr/src/app/.next/static ./.next/static
+COPY --from=prerelease /usr/src/app/public ./public
+COPY --from=prerelease /usr/src/app/package.json ./package.json
+COPY --from=prerelease /usr/src/app/next.config.mjs ./next.config.mjs
 CMD [ "bun", "run", "server.js" ]
