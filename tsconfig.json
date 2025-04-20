@@ -23,7 +23,12 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "paths": {
+      "@prismaclient/*": [
+        "./prisma/*"
+      ]
+    }
   },
   "include": [
     ".eslintrc.cjs",
