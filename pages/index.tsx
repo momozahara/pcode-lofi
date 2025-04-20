@@ -294,7 +294,8 @@ export default function Home({ channelList }: Props) {
               widgetid: 1,
             },
           }}
-          onReady={(e) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          onReady={(e: any) => {
             onPlayerReady(e.target as YouTubePlayer);
           }}
           onStateChange={onPlayerStateChange}

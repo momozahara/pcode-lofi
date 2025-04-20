@@ -20,7 +20,7 @@
     "react-youtube": "^10.0.0"
   },
   "devDependencies": {
-    "@eslint/js": "9.9.0",
+    "@eslint/js": "^9.24.0",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
@@ -32,19 +32,12 @@
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "15.9.0",
     "postcss": "^8.4.19",
+    "prettier": "^3.5.3",
     "prisma": "^4.16.2",
     "tailwindcss": "^3.2.4",
     "ts-node": "^10.9.1",
     "typescript": "4.8.4",
     "typescript-eslint": "8.0.1"
   },
-  "pnpm": {
-    "overrides": {
-      "postcss@<8.4.31": ">=8.4.31",
-      "next@>=0.9.9 <13.4.20-canary.13": ">=13.4.20-canary.13",
-      "next@>=13.4.0 <14.1.1": ">=14.1.1",
-      "braces@<3.0.3": ">=3.0.3"
-    }
-  },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "packageManager": "pnpm@10.8.1+sha512.c50088ba998c67b8ca8c99df8a5e02fd2ae2e2b29aaf238feaa9e124248d3f48f9fb6db2424949ff901cffbb5e0f0cc1ad6aedb602cd29450751d11c35023677"
 }
