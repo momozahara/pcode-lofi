@@ -1,3 +1,4 @@
+import prisma from "@prismaclient/client";
 import React, { type ChangeEvent, useEffect, useRef, useState } from "react";
 import {
   menuPath,
@@ -8,8 +9,6 @@ import {
 } from "components/button";
 import Item from "components/item";
 import YouTube, { type YouTubeEvent } from "react-youtube";
-
-import { getChannel } from "components/api/channel";
 
 import { type ItemType, type Props } from "../components/types/index.types";
 import { type YouTubePlayer } from "components/types/youtubeplayer.types";
@@ -368,7 +367,7 @@ export default function Home({ channelList }: Props) {
 }
 
 export async function getServerSideProps() {
-  let result = await getChannel();
+  let result = await prisma.channel.findMany();
   result = result.sort((a, b) => a.weight - b.weight);
   return {
     props: {
