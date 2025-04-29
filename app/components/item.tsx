@@ -1,5 +1,5 @@
 import React from "react";
-import { playPath } from "components/button";
+import { playPath } from "./button";
 import { type ItemProps } from "./types/item.types";
 
 export default function Item({ item, current, onClick }: ItemProps) {

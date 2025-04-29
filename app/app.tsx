@@ -1,4 +1,5 @@
-import prisma from "@prismaclient/client";
+"use client";
+
 import React, { type ChangeEvent, useEffect, useRef, useState } from "react";
 import {
   menuPath,
@@ -6,17 +7,17 @@ import {
   Shuffle,
   Volume,
   VolumeSlider,
-} from "components/button";
-import Item from "components/item";
+} from "@/app/components/button";
+import Item from "@/app/components/item";
 import YouTube, { type YouTubeEvent } from "react-youtube";
 
-import { type ItemType, type Props } from "../components/types/index.types";
-import { type YouTubePlayer } from "components/types/youtubeplayer.types";
-import Helper from "components/helper";
+import { type ItemType, type Props } from "@/app/components/types/index.types";
+import { type YouTubePlayer } from "@/app/components/types/youtubeplayer.types";
+import Helper from "@/app/components/helper";
 
 export default function Home({ channelList }: Props) {
-  const mainRef = useRef<HTMLElement>();
-  const player = useRef<YouTubePlayer>();
+  const mainRef = useRef<HTMLElement>(null);
+  const player = useRef<YouTubePlayer>(null);
   const [appReady, setAppReady] = useState(false);
 
   const [currentSong, setCurrentSong] = useState(channelList[0]);
@@ -131,7 +132,7 @@ export default function Home({ channelList }: Props) {
   }, []);
 
   useEffect(() => {
-    if (player.current === undefined) {
+    if (!player.current) {
       return;
     }
     if (isPlaying) {
@@ -142,7 +143,7 @@ export default function Home({ channelList }: Props) {
   }, [player, isPlaying]);
 
   useEffect(() => {
-    if (player.current === undefined) {
+    if (!player.current) {
       return;
     }
     if (!player.current.setVolume) {
@@ -233,6 +234,9 @@ export default function Home({ channelList }: Props) {
     }
 
     document.title = currentSong.name.toUpperCase();
+    if (!player.current) {
+      return;
+    }
     if (isMuted) {
       player.current.setVolume(0);
     } else {
@@ -364,14 +368,4 @@ export default function Home({ channelList }: Props) {
       </div>
     </main>
   );
-}
-
-export async function getServerSideProps() {
-  let result = await prisma.channel.findMany();
-  result = result.sort((a, b) => a.weight - b.weight);
-  return {
-    props: {
-      channelList: result,
-    },
-  };
 }
